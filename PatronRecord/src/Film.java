@@ -193,11 +193,9 @@ public class Film {
         }
     }
 
-<<<<<<< HEAD
+
     public  void createFilm(){
 
-=======
-    public static void createTable(){
 
         String req = "CREATE TABLE `Film` ("+
                       "`id` int(11) NOT NULL,"+
@@ -238,7 +236,6 @@ public class Film {
         } catch (SQLException e) {
             System.out.println("Problème SQL lors de la suppression de la table : " + e.getMessage());
         }
->>>>>>> 921249e2ec0760584efffaa20799d34e83d6f705
     }
 
     public String toString(){
