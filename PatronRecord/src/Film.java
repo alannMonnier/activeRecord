@@ -55,6 +55,7 @@ public class Film {
             statement.setInt(1, p);
 
             ResultSet rs = statement.executeQuery();
+            rs.next();
 
             Film film = new Film(rs.getString("titre"), rs.getInt("id"), rs.getInt("id_rea"));
 
@@ -67,7 +68,7 @@ public class Film {
         }
     }
 
-    public static ArrayList<Film> findAll(String n){
+    public static ArrayList<Film> findAll(){
 
         String req = "SELECT * FROM FILM";
 
@@ -138,6 +139,7 @@ public class Film {
             if (nbligne > 0) {
                 System.out.println("Film inséré avec succès");
                 ResultSet rs = statement.getGeneratedKeys();
+                rs.next();
                 this.id = rs.getInt(1);
 
             } else {
@@ -175,7 +177,7 @@ public class Film {
         if(this.id == -1){
             insertFilm();
         }else{
-            String req = "UPDATE FROM FILM (titre, id_rea) VALUES (?, ?) WHERE id = ?";
+            String req = "UPDATE FILM (titre, id_rea) VALUES (?, ?) WHERE id = ?";
 
             PreparedStatement statement = connect.prepareStatement(req);
 
