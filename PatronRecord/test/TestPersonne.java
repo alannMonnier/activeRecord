@@ -71,7 +71,8 @@ class TestPersonne {
     public void testSaveNouveau()  {
         Personne p = new Personne("NomTest", "PrenomTest");
         p.save();
-        System.out.println(p.getId());
+
+
         assertEquals(4, p.getId());
         Personne pers = Personne.findById(4);
         assertEquals(pers.getNom(), "NomTest");
@@ -83,17 +84,17 @@ class TestPersonne {
     public void testSaveExistant()  {
         // modifie la personne
         Personne p = Personne.findById(2);
-        p.setNom("Bertrand");
+        p.setNom("spielberg");
         p.save();
         assertEquals(2, p.getId(),"id ne devrait pas bouger");
 
         // on la recherche
-        ArrayList<Personne> pers = Personne.findByName("Bertrand");
+        ArrayList<Personne> pers = Personne.findByName("spielberg");
         assertEquals(1, pers.size());
         Personne p2 = pers.get(0);
-        assertEquals("Bertrand", p2.getNom());
-        assertEquals("Ridley", p2.getPrenom());
-        assertEquals(p2.getId(), 2,"ide devrait etre le meme");
+        assertEquals("spielberg", p2.getNom());
+        assertEquals("steven", p2.getPrenom());
+        assertEquals(p2.getId(), 1,"ide devrait etre le meme");
     }
 
 

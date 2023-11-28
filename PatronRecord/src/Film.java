@@ -195,7 +195,9 @@ public class Film {
         }
     }
 
-    public static void createTable(){
+
+    public  void createFilm(){
+
 
         String req = "CREATE TABLE `Film` ("+
                       "`id` int(11) NOT NULL,"+

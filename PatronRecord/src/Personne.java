@@ -175,30 +175,6 @@ public class Personne {
             System.out.println("Cette Personne est déjà dans la table");
         }
     }
-    /**
-     public void insertPersonne() throws SQLException {
-
-     String req = "INSERT INTO PERSONNE (nom, prenom) VALUES (? , ?)";
-
-     if (this.id == -1) {
-
-     PreparedStatement statement = connect.prepareStatement(req);
-
-     statement.setString(1, this.nom);
-     statement.setString(2, this.prenom);
-
-     int nbligne = statement.executeUpdate();
-
-     if (nbligne > 0) {
-     System.out.println("Personne insérée avec succès");
-     } else {
-     System.out.println("Erreur lors de l'insertion de la personne");
-     }
-
-     } else {
-     System.out.println("Cette Personne est déjà dans la table");
-     }
-     }*/
 
     public void deletePersonne() throws SQLException {
         String req = "DELETE FROM PERSONNE WHERE id = ?";
@@ -233,7 +209,7 @@ public class Personne {
             }
         }
         else{
-            String req = "UPDATE PERSONNE SET nom = ?, prenom = ? WHERE id = ? ";
+            String req = "UPDATE PERSONNE (nom, prenom) VALUES (?, ?) WHERE id = ? ";
             try{
                 PreparedStatement statement = connect.prepareStatement(req);
 
