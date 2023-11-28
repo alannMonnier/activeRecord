@@ -193,6 +193,10 @@ public class Film {
         }
     }
 
+    public  void createFilm(){
+
+    }
+
     public String toString(){
         return "ID :"+this.id+" Titre : "+this.titre+" ID Réalisateur: "+this.id_rea;
     }
