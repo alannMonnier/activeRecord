@@ -196,7 +196,7 @@ public class Film {
     }
 
 
-    public  void createFilm(){
+    public static void createTable(){
 
 
         String req = "CREATE TABLE `Film` ("+
