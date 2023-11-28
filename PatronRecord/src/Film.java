@@ -193,8 +193,52 @@ public class Film {
         }
     }
 
+<<<<<<< HEAD
     public  void createFilm(){
 
+=======
+    public static void createTable(){
+
+        String req = "CREATE TABLE `Film` ("+
+                      "`id` int(11) NOT NULL,"+
+                      "`titre` varchar(40) NOT NULL,"+
+                      "`id_rea` int(11) DEFAULT NULL"+
+                      ")";
+        String req2 = "ALTER TABLE `Film` ADD PRIMARY KEY (`id`) ";
+        String req3 = "ALTER TABLE `Film` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0 ";
+
+        try {
+            PreparedStatement statement = connect.prepareStatement(req);
+            statement.executeUpdate();
+            statement.close();
+
+            statement = connect.prepareStatement(req2);
+            statement.executeUpdate();
+            statement.close();
+
+            statement = connect.prepareStatement(req3);
+            statement.executeUpdate();
+            statement.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problème SQL lors de la création de la table Film : " + e.getMessage());
+        }
+    }
+
+
+    public static void deleteTable(){
+        String req = "drop table `Film`";
+
+        try {
+            PreparedStatement statement = connect.prepareStatement(req);
+            statement.executeUpdate();
+
+            statement.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problème SQL lors de la suppression de la table : " + e.getMessage());
+        }
+>>>>>>> 921249e2ec0760584efffaa20799d34e83d6f705
     }
 
     public String toString(){
