@@ -18,20 +18,22 @@ public class Personne {
         this.id = -1;
     }
 
-    public static Personne findById(int p){
+    public static Personne findById(int id){
         //Connection connect = DBConnection.getConnection();
 
-        String req = "SELECT * FROM PERSONNE WHERE id = ?";
+        String req = "SELECT * FROM `PERSONNE` WHERE id = ?";
+
 
         try {
+
             PreparedStatement statement = connect.prepareStatement(req);
 
-            statement.setInt(1, p);
-
-            ResultSet rs = statement.executeQuery();
-
+            statement.setInt(1, id);
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
+            rs.next();
             Personne perso = new Personne(rs.getString("nom"), rs.getString("prenom"));
-            perso.setId(p);
+            perso.setId(id);
 
             statement.close();
 
@@ -84,8 +86,9 @@ public class Personne {
 
         try {
             PreparedStatement statement = connect.prepareStatement(req);
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
 
-            ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
                 Personne perso = new Personne(rs.getString("nom"), rs.getString("prenom"));
@@ -94,7 +97,6 @@ public class Personne {
             }
 
             statement.close();
-
 
             return lisperso;
 
@@ -112,7 +114,7 @@ public class Personne {
                 "  `prenom` varchar(40) NOT NULL" +
                 ")";
         String req2 = "ALTER TABLE `Personne` ADD PRIMARY KEY (`id`) ";
-        String req3 = "ALTER TABLE `Personne` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5 ";
+        String req3 = "ALTER TABLE `Personne` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0 ";
 
         try {
             PreparedStatement statement = connect.prepareStatement(req);
@@ -147,7 +149,7 @@ public class Personne {
         }
     }
 
-    /**
+
     public void insertPersonne() throws SQLException {
 
         String req = "INSERT INTO PERSONNE (nom, prenom) VALUES (? , ?)";
@@ -164,6 +166,7 @@ public class Personne {
             if (nbligne > 0) {
                 System.out.println("Personne insérée avec succès");
                 ResultSet rs = statement.getGeneratedKeys();
+                rs.next();
                 this.id = rs.getInt(1);
             } else {
                 System.out.println("Erreur lors de l'insertion de la personne");
@@ -171,31 +174,31 @@ public class Personne {
         } else {
             System.out.println("Cette Personne est déjà dans la table");
         }
-    }*/
-
-    public void insertPersonne() throws SQLException {
-
-        String req = "INSERT INTO PERSONNE (nom, prenom) VALUES (? , ?)";
-
-        if (this.id == -1) {
-
-            PreparedStatement statement = connect.prepareStatement(req);
-
-                statement.setString(1, this.nom);
-                statement.setString(2, this.prenom);
-
-                int nbligne = statement.executeUpdate();
-
-                if (nbligne > 0) {
-                    System.out.println("Personne insérée avec succès");
-                } else {
-                    System.out.println("Erreur lors de l'insertion de la personne");
-                }
-
-        } else {
-            System.out.println("Cette Personne est déjà dans la table");
-        }
     }
+    /**
+     public void insertPersonne() throws SQLException {
+
+     String req = "INSERT INTO PERSONNE (nom, prenom) VALUES (? , ?)";
+
+     if (this.id == -1) {
+
+     PreparedStatement statement = connect.prepareStatement(req);
+
+     statement.setString(1, this.nom);
+     statement.setString(2, this.prenom);
+
+     int nbligne = statement.executeUpdate();
+
+     if (nbligne > 0) {
+     System.out.println("Personne insérée avec succès");
+     } else {
+     System.out.println("Erreur lors de l'insertion de la personne");
+     }
+
+     } else {
+     System.out.println("Cette Personne est déjà dans la table");
+     }
+     }*/
 
     public void deletePersonne() throws SQLException {
         String req = "DELETE FROM PERSONNE WHERE id = ?";
@@ -207,6 +210,7 @@ public class Personne {
             PreparedStatement statement = connect.prepareStatement(req);
 
             statement.setInt(1, this.id);
+            this.id = -1;
 
             int nbligne = statement.executeUpdate();
 
@@ -229,7 +233,7 @@ public class Personne {
             }
         }
         else{
-            String req = "UPDATE FROM PERSONNE (nom, prenom) VALUES (?, ?) WHERE id = ?";
+            String req = "UPDATE PERSONNE SET nom = ?, prenom = ? WHERE id = ? ";
             try{
                 PreparedStatement statement = connect.prepareStatement(req);
 
