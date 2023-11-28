@@ -233,7 +233,7 @@ public class Personne {
             }
         }
         else{
-            String req = "UPDATE FROM PERSONNE (nom, prenom) VALUES (?, ?) WHERE id = ? ";
+            String req = "UPDATE PERSONNE (nom, prenom) VALUES (?, ?) WHERE id = ? ";
             try{
                 PreparedStatement statement = connect.prepareStatement(req);
 
