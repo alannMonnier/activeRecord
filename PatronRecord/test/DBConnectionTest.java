@@ -28,4 +28,5 @@ class DBConnectionTest {
         DBConnection.setNomDB("test");
         assertFalse(db == DBConnection.getConnection(), "Le nom de la base devrait être différent");
     }
+    
 }
